@@ -57,7 +57,7 @@ interface IRational {
 		if (getNumerator() == 0) {
 			throw new IllegalStateException("Numerator must not be zero.");
 		}
-		return new Rational (getDenominator(), getNumerator());
+		return construct(getDenominator(), getNumerator());
 	}
 
 	/**
@@ -77,7 +77,7 @@ interface IRational {
 		}
 		int num = (getNumerator() * that.getDenominator()) + (that.getNumerator() * getDenominator());
 		int den = getDenominator() * that.getDenominator();
-		return new Rational(num, den);
+		return construct(num, den);
 	}
 
 	/**
@@ -97,7 +97,7 @@ interface IRational {
 		}
 		int num = (getNumerator() * that.getDenominator()) - (that.getNumerator() * getDenominator());
 		int den = getDenominator() * that.getDenominator();
-		return new Rational(num, den);
+		return construct(num, den);
 	}
 
 	/**
@@ -117,7 +117,7 @@ interface IRational {
 		}
 		int num = getNumerator() * that.getNumerator();
 		int den = getDenominator() * that.getDenominator();
-		return new Rational(num, den);
+		return construct(num, den);
 	}
 
 	/**
@@ -137,6 +137,6 @@ interface IRational {
 		}
 		int num = getNumerator() * that.getDenominator();
 		int den = getDenominator() * that.getNumerator();
-		return new Rational(num, den);
+		return construct(num, den);
 	}
 }

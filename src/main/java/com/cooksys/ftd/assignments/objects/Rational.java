@@ -69,16 +69,15 @@ public class Rational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj.equals(this)) {
+        if (this == obj) {
             return true;
         }
 
-        Rational rational = (Rational) obj;
-
-        if (rational._numerator == _numerator && rational._denominator == _denominator) {
-            return true;
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
         }
-        return false;
+        Rational rational = new Rational(_numerator, _denominator);
+        return obj.hashCode() == rational.hashCode();
     }
 
     /**

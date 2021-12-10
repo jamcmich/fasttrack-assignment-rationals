@@ -105,7 +105,7 @@ public class SimplifiedRational implements IRational {
         if (denominator == 0) {
             throw new IllegalArgumentException("Denominator must not be zero.");
         }
-        return new SimplifiedRational(_numerator, _denominator);
+        return new SimplifiedRational(numerator, denominator);
     }
 
     /**
@@ -116,16 +116,15 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj.equals(this)) {
+        if (this == obj) {
             return true;
         }
 
-        SimplifiedRational rational = (SimplifiedRational) obj;
-
-        if (_numerator == rational._numerator && _denominator == rational._denominator) {
-            return true;
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
         }
-        return false;
+        SimplifiedRational simplifiedRational = (SimplifiedRational) obj;
+        return _numerator == simplifiedRational._numerator && _denominator == simplifiedRational._denominator;
     }
 
     /**
