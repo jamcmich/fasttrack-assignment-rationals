@@ -54,7 +54,10 @@ interface IRational {
 	 *             if the numerator of this rational value is 0
 	 */
 	default IRational invert() throws IllegalStateException {
-		throw new IllegalArgumentException();
+		if (getNumerator() == 0) {
+			throw new IllegalStateException("Numerator must not be zero.");
+		}
+		return new Rational (getDenominator(), getNumerator());
 	}
 
 	/**
@@ -69,7 +72,12 @@ interface IRational {
 	 *             if that is null
 	 */
 	default IRational add(IRational that) throws IllegalArgumentException {
-		throw new IllegalArgumentException();
+		if (that == null) {
+			throw new IllegalArgumentException("Value must not be null.");
+		}
+		int num = (getNumerator() * that.getDenominator()) + (that.getNumerator() * getDenominator());
+		int den = getDenominator() * that.getDenominator();
+		return new Rational(num, den);
 	}
 
 	/**
@@ -84,7 +92,12 @@ interface IRational {
 	 *             if that is null
 	 */
 	default IRational sub(IRational that) throws IllegalArgumentException {
-		throw new IllegalArgumentException();
+		if (that == null) {
+			throw new IllegalArgumentException("Value must not be null.");
+		}
+		int num = (getNumerator() * that.getDenominator()) - (that.getNumerator() * getDenominator());
+		int den = getDenominator() * that.getDenominator();
+		return new Rational(num, den);
 	}
 
 	/**
@@ -99,7 +112,12 @@ interface IRational {
 	 *             if that is null
 	 */
 	default IRational mul(IRational that) throws IllegalArgumentException {
-		throw new IllegalArgumentException();
+		if (that == null) {
+			throw new IllegalArgumentException("Value must not be null.");
+		}
+		int num = getNumerator() * that.getNumerator();
+		int den = getDenominator() * that.getDenominator();
+		return new Rational(num, den);
 	}
 
 	/**
@@ -114,6 +132,11 @@ interface IRational {
 	 *             if that is null or if the numerator of that is 0
 	 */
 	default IRational div(IRational that) throws IllegalArgumentException {
-		throw new IllegalArgumentException();
+		if (that == null) {
+			throw new IllegalArgumentException("Value must not be null.");
+		}
+		int num = getNumerator() * that.getDenominator();
+		int den = getDenominator() * that.getNumerator();
+		return new Rational(num, den);
 	}
 }

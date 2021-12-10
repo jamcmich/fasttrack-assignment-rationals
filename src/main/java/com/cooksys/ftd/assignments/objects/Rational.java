@@ -75,7 +75,7 @@ public class Rational implements IRational {
 
         Rational rational = (Rational) obj;
 
-        if (rational._numerator == this._numerator && rational._denominator == this._denominator) {
+        if (rational._numerator == _numerator && rational._denominator == _denominator) {
             return true;
         }
         return false;
