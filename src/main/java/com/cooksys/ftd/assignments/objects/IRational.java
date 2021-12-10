@@ -31,6 +31,13 @@ interface IRational {
 	 */
 	IRational construct(int numerator, int denominator) throws IllegalArgumentException;
 
+//	default IRational construct(int numerator, int denominator) throws IllegalArgumentException {
+//		if (denominator == 0) {
+//			throw new IllegalArgumentException("Denominator must not be zero.");
+//		}
+//		return new Rational(numerator, denominator);
+//	}
+
 	/**
 	 * negation of rational values
 	 * <p>

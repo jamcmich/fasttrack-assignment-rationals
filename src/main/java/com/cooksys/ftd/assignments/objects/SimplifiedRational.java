@@ -41,7 +41,7 @@ public class SimplifiedRational implements IRational {
         }
 
         int greatestCommonDenominator;
-        greatestCommonDenominator = gcd(numerator, denominator);
+        greatestCommonDenominator = Math.abs(gcd(numerator, denominator));
 
         numerator = numerator / greatestCommonDenominator;
         denominator = denominator / greatestCommonDenominator;
@@ -68,7 +68,7 @@ public class SimplifiedRational implements IRational {
         if (denominator == 0) {
             throw new IllegalArgumentException("Denominator must not be zero.");
         }
-        int greatestCommonDenominator = gcd(numerator, denominator);
+        int greatestCommonDenominator = Math.abs(gcd(numerator, denominator));
         _numerator = numerator / greatestCommonDenominator;
         _denominator = denominator / greatestCommonDenominator;
     }
@@ -136,10 +136,9 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public String toString() {
-        if (_numerator >= 0 && _denominator >= 0) {
-            return _numerator + "/" + _denominator;
+        if (_denominator < 0) {
+            return -_numerator + "/" + Math.abs(_denominator);
         }
-
-        return "-" + Math.abs(_numerator) + "/" + Math.abs(_denominator);
+        return _numerator + "/" + _denominator;
     }
 }
