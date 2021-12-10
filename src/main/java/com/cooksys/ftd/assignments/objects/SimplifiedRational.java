@@ -16,10 +16,13 @@ public class SimplifiedRational implements IRational {
 //            throw new IllegalArgumentException("Values must be greater than zero.");
 //        }
 
-        if (b == 0) {
-            return a;
+        int greatestCommonDenominator = 0;
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
-        return gcd(b, a % b);
+        return a;
     }
 
     /**
