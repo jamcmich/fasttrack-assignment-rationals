@@ -1,6 +1,6 @@
 package com.cooksys.ftd.assignments.objects;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+//import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Rational implements IRational {
     /**
@@ -14,8 +14,16 @@ public class Rational implements IRational {
      * @param denominator the denominator of the rational value
      * @throws IllegalArgumentException if the given denominator is 0
      */
+    private int _numerator;
+    private int _denominator;
+
     public Rational(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        super();
+        if (denominator == 0) {
+            throw new IllegalArgumentException("Denominator must not be zero.");
+        }
+        _numerator = numerator;
+        _denominator = denominator;
     }
 
     /**
@@ -23,7 +31,7 @@ public class Rational implements IRational {
      */
     @Override
     public int getNumerator() {
-        throw new NotImplementedException();
+        return _numerator;
     }
 
     /**
@@ -31,11 +39,11 @@ public class Rational implements IRational {
      */
     @Override
     public int getDenominator() {
-        throw new NotImplementedException();
+        return _denominator;
     }
 
     /**
-     * Specializable constructor to take advantage of shared code between Rational and SimplifiedRational
+     * Specialized constructor to take advantage of shared code between Rational and SimplifiedRational
      * <p>
      * Essentially, this method allows us to implement most of IRational methods directly in the interface while
      * preserving the underlying type
@@ -47,7 +55,10 @@ public class Rational implements IRational {
      */
     @Override
     public Rational construct(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (denominator == 0) {
+            throw new IllegalArgumentException("Denominator must not be zero.");
+        }
+        return new Rational(_numerator, _denominator);
     }
 
     /**
@@ -58,7 +69,16 @@ public class Rational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        throw new NotImplementedException();
+        if (obj.equals(this)) {
+            return true;
+        }
+
+        Rational rational = (Rational) obj;
+
+        if (rational._numerator == this._numerator && rational._denominator == this._denominator) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -70,6 +90,6 @@ public class Rational implements IRational {
      */
     @Override
     public String toString() {
-        throw new NotImplementedException();
+        return _numerator + "/" + _denominator;
     }
 }
