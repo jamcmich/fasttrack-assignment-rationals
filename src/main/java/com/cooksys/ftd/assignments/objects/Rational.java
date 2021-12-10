@@ -58,7 +58,7 @@ public class Rational implements IRational {
         if (denominator == 0) {
             throw new IllegalArgumentException("Denominator must not be zero.");
         }
-        return new Rational(_numerator, _denominator);
+        return new Rational(numerator, denominator);
     }
 
     /**

@@ -12,17 +12,14 @@ public class SimplifiedRational implements IRational {
      * @throws IllegalArgumentException if a <= 0 or b < 0
      */
     public static int gcd(int a, int b) throws IllegalArgumentException {
-        if (a <= 0 || b < 0) {
-            throw new IllegalArgumentException("Value B must be greater than or equal to value A.");
+//        if (a <= 0 || b < 0) {
+//            throw new IllegalArgumentException("Values must be greater than zero.");
+//        }
+
+        if (b == 0) {
+            return a;
         }
-        int greatestCommonFactor = 0;
-        int min = Math.min(a, b);
-        for (int i = 1; i < min; i++) {
-            if (a % i == 0 && b % i == 0) {
-                greatestCommonFactor = i;
-            }
-        }
-        return greatestCommonFactor;
+        return gcd(b, a % b);
     }
 
     /**
@@ -43,12 +40,13 @@ public class SimplifiedRational implements IRational {
             throw new IllegalArgumentException("Denominator must not be zero.");
         }
 
-        if (numerator == 0) {
-            return new int[]{0, 1};
-        }
-        int num = numerator / gcd(numerator, denominator);
-        int den = numerator / gcd(numerator, denominator);
-        return new int[]{num, den};
+        int greatestCommonDenominator;
+        greatestCommonDenominator = gcd(numerator, denominator);
+
+        numerator = numerator / greatestCommonDenominator;
+        denominator = denominator / greatestCommonDenominator;
+
+        return new int[]{ numerator, denominator };
     }
 
     /**
@@ -63,8 +61,16 @@ public class SimplifiedRational implements IRational {
      * @param denominator the denominator of the rational value
      * @throws IllegalArgumentException if the given denominator is 0
      */
+    private int _numerator;
+    private int _denominator;
+
     public SimplifiedRational(int numerator, int denominator) throws IllegalArgumentException {
-        throw new IllegalArgumentException();
+        if (denominator == 0) {
+            throw new IllegalArgumentException("Denominator must not be zero.");
+        }
+        int greatestCommonDenominator = gcd(numerator, denominator);
+        _numerator = numerator / greatestCommonDenominator;
+        _denominator = denominator / greatestCommonDenominator;
     }
 
     /**
@@ -72,7 +78,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getNumerator() {
-        throw new IllegalArgumentException();
+        return _numerator;
     }
 
     /**
@@ -80,7 +86,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getDenominator() {
-        throw new IllegalArgumentException();
+        return _denominator;
     }
 
     /**
@@ -99,7 +105,7 @@ public class SimplifiedRational implements IRational {
         if (denominator == 0) {
             throw new IllegalArgumentException("Denominator must not be zero.");
         }
-        return new Rational(numerator, denominator);
+        return new SimplifiedRational(_numerator, _denominator);
     }
 
     /**
@@ -110,7 +116,16 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        throw new IllegalArgumentException();
+        if (obj.equals(this)) {
+            return true;
+        }
+
+        SimplifiedRational rational = (SimplifiedRational) obj;
+
+        if (_numerator == rational._numerator && _denominator == rational._denominator) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -122,6 +137,10 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public String toString() {
-        throw new IllegalArgumentException();
+        if (_numerator >= 0 && _denominator >= 0) {
+            return _numerator + "/" + _denominator;
+        }
+
+        return "-" + Math.abs(_numerator) + "/" + Math.abs(_denominator);
     }
 }
