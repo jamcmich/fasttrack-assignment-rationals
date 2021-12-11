@@ -73,11 +73,11 @@ public class Rational implements IRational {
             return true;
         }
 
-        if (obj == null || this.getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Rational rational = new Rational(_numerator, _denominator);
-        return obj.hashCode() == rational.hashCode();
+        Rational rational = (Rational) obj;
+        return _numerator == rational._numerator && _denominator == rational._denominator;
     }
 
     /**
@@ -89,6 +89,9 @@ public class Rational implements IRational {
      */
     @Override
     public String toString() {
+        if (_denominator < 0) {
+            return -_numerator + "/" + Math.abs(_denominator);
+        }
         return _numerator + "/" + _denominator;
     }
 }
