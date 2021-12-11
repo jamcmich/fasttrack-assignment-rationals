@@ -61,9 +61,9 @@ interface IRational {
 	 *             if the numerator of this rational value is 0
 	 */
 	default IRational invert() throws IllegalStateException {
-		if (getNumerator() == 0) {
-			throw new IllegalStateException("Numerator must not be zero.");
-		}
+//		if (getNumerator() == 0) {
+//			throw new IllegalStateException();
+//		}
 		return construct(getDenominator(), getNumerator());
 	}
 

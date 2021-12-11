@@ -12,11 +12,10 @@ public class SimplifiedRational implements IRational {
      * @throws IllegalArgumentException if a <= 0 or b < 0
      */
     public static int gcd(int a, int b) throws IllegalArgumentException {
-//        if (a <= 0 || b < 0) {
-//            throw new IllegalArgumentException("Values must be greater than zero.");
-//        }
+        if (a <= 0 || b < 0) {
+            throw new IllegalArgumentException("Values must be greater than zero.");
+        }
 
-        int greatestCommonDenominator = 0;
         while (b != 0) {
             int temp = b;
             b = a % b;
@@ -43,8 +42,7 @@ public class SimplifiedRational implements IRational {
             throw new IllegalArgumentException("Denominator must not be zero.");
         }
 
-        int greatestCommonDenominator;
-        greatestCommonDenominator = Math.abs(gcd(numerator, denominator));
+        int greatestCommonDenominator = gcd(Math.abs(numerator), Math.abs(denominator));
 
         numerator = numerator / greatestCommonDenominator;
         denominator = denominator / greatestCommonDenominator;
@@ -68,10 +66,13 @@ public class SimplifiedRational implements IRational {
     private int _denominator;
 
     public SimplifiedRational(int numerator, int denominator) throws IllegalArgumentException {
+        super();
         if (denominator == 0) {
             throw new IllegalArgumentException("Denominator must not be zero.");
         }
-        int greatestCommonDenominator = Math.abs(gcd(numerator, denominator));
+
+        int greatestCommonDenominator = gcd(Math.abs(numerator), Math.abs(denominator));
+
         _numerator = numerator / greatestCommonDenominator;
         _denominator = denominator / greatestCommonDenominator;
     }

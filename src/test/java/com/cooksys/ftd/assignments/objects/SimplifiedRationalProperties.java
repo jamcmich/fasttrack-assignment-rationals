@@ -106,7 +106,7 @@ public class SimplifiedRationalProperties {
 
     @Property
     public void invertFail(@When(satisfies = "#_ != 0") int d) {
-        thrown.expect(IllegalStateException.class);
+        thrown.expect(IllegalArgumentException.class);
         new SimplifiedRational(0, d).invert();
     }
 
